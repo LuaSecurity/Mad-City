@@ -1,1 +1,3 @@
-print("still not updated.")
+local plr = game.Players.LocalPlayer
+
+plr:Kick("This auto rob isnt available right now, try again later! We are currently trying to recover our last source. (While making a new one!)\n\n\ndiscord.gg/Mwvj3zU6En")
