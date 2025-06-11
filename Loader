@@ -1,7 +1,11 @@
 if _G.LoadXP == true then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
-elseif _G.Menu == true then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
-elseif _G.AutoRob == true then
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Xp%20Auto%20Farm"))()
+end
+
+if _G.LoadMenu == true then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Menu"))()
+end
+
+if _G.LoadAutoRob == true then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Auto%20Robber"))()
 end
