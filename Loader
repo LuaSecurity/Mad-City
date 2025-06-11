@@ -1,0 +1,7 @@
+if _G.LoadXP == true then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
+elseif _G.Menu == true then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
+elseif _G.AutoRob == true then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RelaxxxX-Lab/Mad-city-season-4-Menu/refs/heads/main/Xp%20Auto%20Farm"))()
+end
