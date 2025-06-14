@@ -1,0 +1,37 @@
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui", player.PlayerGui)
+screenGui.ResetOnSpawn = false
+
+local frame = Instance.new("Frame", screenGui)
+frame.Size = UDim2.new(1, 0, 1, 0)
+frame.BackgroundColor3 = Color3.new(1, 1, 1)
+frame.BackgroundTransparency = 0.3
+
+local textLabel = Instance.new("TextLabel", screenGui)
+textLabel.Size = UDim2.new(1, 0, 0, 50)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "Anti Lag is enabled!"
+textLabel.TextColor3 = Color3.new(0, 0, 0)
+textLabel.TextScaled = true
+
+
+for _, v in ipairs(workspace:GetDescendants()) do
+	if v:IsA("Texture") or v:IsA("Decal") or v:IsA("SurfaceAppearance") then
+		v:Destroy()
+	end
+end
+workspace.Terrain:Clear()
+
+local player = game:GetService("Players").LocalPlayer
+local camera = game.Workspace.CurrentCamera
+local function C(x, y, z)
+    local targetCFrame = CFrame.new(x, y, z)
+    game:GetService("RunService").RenderStepped:Connect(
+        function()
+            camera.CFrame = targetCFrame
+        end
+    )
+end
+C(-8000, 8000, 8000)
+
