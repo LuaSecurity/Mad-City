@@ -1,37 +1,71 @@
 local UILibrary = {}
 
 function UILibrary:CreateWindow(title)
+    local Player = game.Players.LocalPlayer
     local ScreenGui = Instance.new("ScreenGui")
-    local Frame = Instance.new("Frame")
-    local TextLabel = Instance.new("TextLabel")
+    ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 
-    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-    Frame.Parent = ScreenGui
-    Frame.Size = UDim2.new(0, 300, 0, 200)
-    Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-    Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 400, 0, 300)
+    MainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    MainFrame.Parent = ScreenGui
 
-    TextLabel.Parent = Frame
-    TextLabel.Size = UDim2.new(1, 0, 0, 50)
-    TextLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-    TextLabel.Text = title or "UI Window"
+    local UICorner = Instance.new("UICorner", MainFrame)
+    UICorner.CornerRadius = UDim.new(0, 8)
 
-    return Frame
+    local Gradient = Instance.new("UIGradient", MainFrame)
+    Gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(40,40,40)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(20,20,20))
+    }
+
+    local Title = Instance.new("TextLabel")
+    Title.Parent = MainFrame
+    Title.Size = UDim2.new(1, 0, 0, 40)
+    Title.BackgroundTransparency = 1
+    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Title.Text = title or "Wave UI"
+    Title.Font = Enum.Font.GothamBold
+    Title.TextSize = 20
+
+    local ButtonContainer = Instance.new("Frame")
+    ButtonContainer.Parent = MainFrame
+    ButtonContainer.Position = UDim2.new(0, 10, 0, 50)
+    ButtonContainer.Size = UDim2.new(1, -20, 1, -60)
+    ButtonContainer.BackgroundTransparency = 1
+
+    local UIListLayout = Instance.new("UIListLayout", ButtonContainer)
+    UIListLayout.Padding = UDim.new(0, 10)
+    UIListLayout.FillDirection = Enum.FillDirection.Vertical
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+    return ButtonContainer
 end
 
 function UILibrary:CreateButton(parent, text, callback)
     local Button = Instance.new("TextButton")
     Button.Parent = parent
-    Button.Size = UDim2.new(0, 100, 0, 30)
-    Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    Button.Size = UDim2.new(1, 0, 0, 40)
+    Button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button.Text = text or "Button"
+    Button.Font = Enum.Font.Gotham
+    Button.TextSize = 16
+
+    local UICorner = Instance.new("UICorner", Button)
+    UICorner.CornerRadius = UDim.new(0, 6)
+
+    local Gradient = Instance.new("UIGradient", Button)
+    Gradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(70,70,70)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(40,40,40))
+    }
+
     Button.MouseButton1Click:Connect(function()
-        if callback then
-            callback()
-        end
+        if callback then callback() end
     end)
+
     return Button
 end
 
