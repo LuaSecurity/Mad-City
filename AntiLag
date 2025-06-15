@@ -1,33 +1,50 @@
+--[[
+
+ ▄  █ ▄███▄ ▀▄    ▄        ▄▄▄▄▄   █  █▀ ▄█ ██▄   
+█   █ █▀   ▀  █  █        █     ▀▄ █▄█   ██ █  █  
+██▀▀█ ██▄▄     ▀█       ▄  ▀▀▀▀▄   █▀▄   ██ █   █ 
+█   █ █▄   ▄▀  █         ▀▄▄▄▄▀    █  █  ▐█ █  █  
+   █  ▀███▀  ▄▀                      █    ▐ ███▀  
+  ▀                                 ▀             
+                                                  
+v1.0
+]]
+
 local player = game.Players.LocalPlayer
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.ResetOnSpawn = false
-screenGui.Parent = player.PlayerGui
+screenGui.IgnoreGuiInset = true
+screenGui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(1, 0, 1, 0)
-frame.BackgroundColor3 = Color3.new(1, 1, 1)
-frame.BackgroundTransparency = 0.3
+frame.Position = UDim2.new(0, 0, 0, 0)
+frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+frame.BackgroundTransparency = 0.2
 frame.Parent = screenGui
 
 local textLabel = Instance.new("TextLabel")
-textLabel.Size = UDim2.new(1, 0, 0, 50)
+textLabel.Size = UDim2.new(1, 0, 1, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
 textLabel.BackgroundTransparency = 1
-textLabel.Text = "Anti Lag is enabled!"
-textLabel.TextColor3 = Color3.new(0, 0, 0)
+textLabel.Text = "Anti-Lag Mode is enabled."
+textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+textLabel.Font = Enum.Font.GothamBold
 textLabel.TextScaled = true
-textLabel.Parent = screenGui
+textLabel.TextWrapped = true
+textLabel.Parent = frame
 
-for _, v in ipairs(workspace:GetDescendants()) do
-	if v:IsA("Texture") or v:IsA("Decal") or v:IsA("SurfaceAppearance") then
-		v:Destroy()
+for _, obj in ipairs(workspace:GetDescendants()) do
+	if obj:IsA("Texture") or obj:IsA("Decal") or obj:IsA("SurfaceAppearance") or obj:IsA("ParticleEmitter") or obj:IsA("Trail") or obj:IsA("Smoke") or obj:IsA("Fire") then
+		obj:Destroy()
 	end
 end
 
 workspace.Terrain:Clear()
 
 local camera = workspace.CurrentCamera
-local targetCFrame = CFrame.new(-8000, 8000, 8000)
+local targetCFrame = CFrame.new(-10000, 10000, 10000)
 
 game:GetService("RunService").RenderStepped:Connect(function()
 	camera.CFrame = targetCFrame
