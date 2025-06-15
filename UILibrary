@@ -1,0 +1,38 @@
+local UILibrary = {}
+
+function UILibrary:CreateWindow(title)
+    local ScreenGui = Instance.new("ScreenGui")
+    local Frame = Instance.new("Frame")
+    local TextLabel = Instance.new("TextLabel")
+
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    Frame.Parent = ScreenGui
+    Frame.Size = UDim2.new(0, 300, 0, 200)
+    Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+
+    TextLabel.Parent = Frame
+    TextLabel.Size = UDim2.new(1, 0, 0, 50)
+    TextLabel.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.Text = title or "UI Window"
+
+    return Frame
+end
+
+function UILibrary:CreateButton(parent, text, callback)
+    local Button = Instance.new("TextButton")
+    Button.Parent = parent
+    Button.Size = UDim2.new(0, 100, 0, 30)
+    Button.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Button.Text = text or "Button"
+    Button.MouseButton1Click:Connect(function()
+        if callback then
+            callback()
+        end
+    end)
+    return Button
+end
+
+return UILibrary
