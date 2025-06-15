@@ -2,71 +2,83 @@ local UILibrary = {}
 
 function UILibrary:CreateWindow(title)
     local Player = game.Players.LocalPlayer
-    local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+    local ScreenGui = Instance.new("ScreenGui", Player:WaitForChild("PlayerGui"))
 
-    local MainFrame = Instance.new("Frame")
-    MainFrame.Size = UDim2.new(0, 400, 0, 300)
-    MainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
-    MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    MainFrame.Parent = ScreenGui
+    local Main = Instance.new("Frame", ScreenGui)
+    Main.Size = UDim2.new(0, 500, 0, 350)
+    Main.Position = UDim2.new(0.5, -250, 0.5, -175)
+    Main.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    Instance.new("UICorner", Main)
 
-    local UICorner = Instance.new("UICorner", MainFrame)
-    UICorner.CornerRadius = UDim.new(0, 8)
+    local TitleLabel = Instance.new("TextLabel", Main)
+    TitleLabel.Size = UDim2.new(1, 0, 0, 40)
+    TitleLabel.BackgroundTransparency = 1
+    TitleLabel.Text = title or "Wave UI"
+    TitleLabel.Font = Enum.Font.GothamBold
+    TitleLabel.TextSize = 20
+    TitleLabel.TextColor3 = Color3.new(1,1,1)
 
-    local Gradient = Instance.new("UIGradient", MainFrame)
-    Gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(40,40,40)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(20,20,20))
-    }
+    local TabHolder = Instance.new("Frame", Main)
+    TabHolder.Position = UDim2.new(0, 0, 0, 40)
+    TabHolder.Size = UDim2.new(0, 120, 1, -40)
+    TabHolder.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    Instance.new("UICorner", TabHolder)
 
-    local Title = Instance.new("TextLabel")
-    Title.Parent = MainFrame
-    Title.Size = UDim2.new(1, 0, 0, 40)
-    Title.BackgroundTransparency = 1
-    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.Text = title or "Wave UI"
-    Title.Font = Enum.Font.GothamBold
-    Title.TextSize = 20
+    local PageHolder = Instance.new("Frame", Main)
+    PageHolder.Position = UDim2.new(0, 130, 0, 50)
+    PageHolder.Size = UDim2.new(1, -140, 1, -60)
+    PageHolder.BackgroundTransparency = 1
 
-    local ButtonContainer = Instance.new("Frame")
-    ButtonContainer.Parent = MainFrame
-    ButtonContainer.Position = UDim2.new(0, 10, 0, 50)
-    ButtonContainer.Size = UDim2.new(1, -20, 1, -60)
-    ButtonContainer.BackgroundTransparency = 1
+    local Tabs = {}
 
-    local UIListLayout = Instance.new("UIListLayout", ButtonContainer)
-    UIListLayout.Padding = UDim.new(0, 10)
-    UIListLayout.FillDirection = Enum.FillDirection.Vertical
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    function Tabs:CreateTab(tabName)
+        local TabButton = Instance.new("TextButton", TabHolder)
+        TabButton.Size = UDim2.new(1, 0, 0, 30)
+        TabButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        TabButton.Text = tabName
+        TabButton.TextColor3 = Color3.new(1,1,1)
+        TabButton.Font = Enum.Font.Gotham
+        TabButton.TextSize = 14
+        Instance.new("UICorner", TabButton)
 
-    return ButtonContainer
-end
+        local Page = Instance.new("Frame", PageHolder)
+        Page.Size = UDim2.new(1, 0, 1, 0)
+        Page.BackgroundTransparency = 1
+        Page.Visible = false
 
-function UILibrary:CreateButton(parent, text, callback)
-    local Button = Instance.new("TextButton")
-    Button.Parent = parent
-    Button.Size = UDim2.new(1, 0, 0, 40)
-    Button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-    Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button.Text = text or "Button"
-    Button.Font = Enum.Font.Gotham
-    Button.TextSize = 16
+        local Layout = Instance.new("UIListLayout", Page)
+        Layout.Padding = UDim.new(0, 6)
+        Layout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    local UICorner = Instance.new("UICorner", Button)
-    UICorner.CornerRadius = UDim.new(0, 6)
+        TabButton.MouseButton1Click:Connect(function()
+            for _, v in pairs(PageHolder:GetChildren()) do
+                if v:IsA("Frame") then
+                    v.Visible = false
+                end
+            end
+            Page.Visible = true
+        end)
 
-    local Gradient = Instance.new("UIGradient", Button)
-    Gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(70,70,70)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(40,40,40))
-    }
+        local Elements = {}
 
-    Button.MouseButton1Click:Connect(function()
-        if callback then callback() end
-    end)
+        function Elements:CreateButton(text, callback)
+            local Btn = Instance.new("TextButton", Page)
+            Btn.Size = UDim2.new(1, 0, 0, 30)
+            Btn.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            Btn.Text = text
+            Btn.TextColor3 = Color3.new(1,1,1)
+            Btn.Font = Enum.Font.Gotham
+            Btn.TextSize = 14
+            Instance.new("UICorner", Btn)
+            Btn.MouseButton1Click:Connect(function()
+                if callback then callback() end
+            end)
+        end
 
-    return Button
+        return Elements
+    end
+
+    return Tabs
 end
 
 return UILibrary
