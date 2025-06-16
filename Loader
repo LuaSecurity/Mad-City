@@ -12,18 +12,18 @@
                                                                                                                             
 ]]
 
-if _G.LoadXP == true then
+if _G.LoadXP then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Xp%20Auto%20Farm"))()
 end
 
-if _G.LoadMenu == true then
+if _G.LoadMenu then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Menu"))()
 end
 
-if _G.LoadAutoRob == true then
+if _G.LoadAutoRob then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Auto%20Robber"))()
 end
 
-if _G.AntiLag == true then
+if _G.AntiLag then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/AntiLag"))()
 end
