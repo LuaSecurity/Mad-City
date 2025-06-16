@@ -7,7 +7,7 @@
    █  ▀███▀  ▄▀                      █    ▐ ███▀  
   ▀                                 ▀             
                                                   
-v1.3
+v1.4
 ]]
 
 local player = game.Players.LocalPlayer
@@ -40,7 +40,18 @@ for _, obj in ipairs(workspace:GetDescendants()) do
 		obj:Destroy()
 	end
 end
-
+workspace["Random Parts/Models"]["Random Models"].Trees:Destroy()
+workspace.VehicleSpawns:Destroy()
+workspace.RandomParts:Destroy()
+workspace.SmartRender:Destroy()
+workspace["Schwifty Studios"]:Destroy()
+workspace.Roads:Destroy()
+workspace["Extra Builds"]:Destroy()
+workspace.Prison:Destroy()
+workspace.Destructibles:Destroy()
+workspace.City:Destroy()
+workspace["Cell Block"]:Destroy()
+workspace.Bunker:Destroy()
 workspace.Terrain:Clear()
 
 local camera = workspace.CurrentCamera
