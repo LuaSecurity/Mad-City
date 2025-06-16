@@ -12,6 +12,8 @@
                                                                                                                             
 ]]
 
+if game.PlaceId ~= 91282350711571 then return end
+
 if _G.LoadXP then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Xp%20Auto%20Farm"))()
 end
