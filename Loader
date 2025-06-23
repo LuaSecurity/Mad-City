@@ -26,6 +26,6 @@ if _G.LoadAutoRob then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Auto%20Robber"))()
 end
 
-if _G.LoadAntiLag then
+if _G.AntiLag then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/AntiLag"))()
 end
