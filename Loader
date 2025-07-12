@@ -12,7 +12,7 @@
                                                                                                                             
 ]]
 
-if game.PlaceId ~= 91282350711571 then return end
+if game.PlaceId == 91282350711571 then 
 
 if _G.LoadXP then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/Xp%20Auto%20Farm"))()
@@ -28,4 +28,7 @@ end
 
 if _G.AntiLag then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaSecurity/Mad-City/refs/heads/main/AntiLag"))()
+end
+elseif game.PlaceId == 142823291 then
+print('nothing for now!')
 end
